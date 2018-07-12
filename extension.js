@@ -69,6 +69,25 @@ const UptimeIndicator=new Lang.Class(
    _refresh: function()
    {
       let text=this._update_uptime();
+      let h=text.split(":")[0];
+      let m=text.split(":")[1];
+      //let s=Math.floor((this._get_timestamps()[0])%60)
+      //(s%2)*
+
+      // To Do's
+      // Take this warning Value from user
+      // Add functionality to accumulate a day's all times, if user machine is
+      //  turned off during a period of time, all times should be added.
+      if(h >= 8) {
+          text=h%8+":"+m;
+          //Main.notify(s);
+          this.buttonText.set_background_color(new Clutter.Color({
+              red : 100,
+              blue : 00,
+              green : 00,
+              alpha : 255
+        }));
+      }
       this.buttonText.set_text(text)
       if(this._change_timeoutloop) {
          this._remove_timeout();
